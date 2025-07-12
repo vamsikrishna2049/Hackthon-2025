@@ -73,3 +73,31 @@ resource "azurerm_network_interface" "vm_nic" {
 
   tags = var.tags
 }
+
+#Locals - 
+locals {
+  allowed_ports = var.allowed_ports
+}
+
+#Security Groups - Port
+resource "azurerm_network_security_group" "web_nsg" {
+  name                = var.nsg_name
+  location            = var.location
+  resource_group_name = var.resource_group_name
+}
+
+resource "azurerm_network_security_rule" "inbound_rules" {
+  for_each = { for idx, port in local.allowed_ports : "rule-${port}" => port }
+
+  name                        = each.key
+  priority                    = 100 + each.value  # priority must be unique and < 4096
+  direction                   = "Inbound"
+  access                      = "Allow"
+  protocol                    = "Tcp"
+  source_port_range           = "*"
+  destination_port_range      = tostring(each.value)
+  source_address_prefix       = "*"
+  destination_address_prefix  = "*"
+  network_security_group_name = azurerm_network_security_group.web_nsg.name
+  resource_group_name         = var.resource_group_name
+}
