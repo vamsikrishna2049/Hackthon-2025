@@ -1,6 +1,3 @@
-# ----------------------
-# compute.tf
-# ----------------------
 resource "azurerm_linux_virtual_machine" "vm" {
   name                  = "atm-private-vm"
   location              = var.location
