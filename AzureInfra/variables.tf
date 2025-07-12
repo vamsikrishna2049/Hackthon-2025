@@ -51,3 +51,9 @@ variable "sql_admin_password" {
   description = "SQL Admin password"
   sensitive   = true
 }
+
+
+variable "allowed_ports" {
+  type    = list(number)
+  default = [80, 443, 1433]  # HTTP, HTTPS, Azure SQL
+}
