@@ -52,8 +52,29 @@ export ARM_CLIENT_SECRET="<password>"
 export ARM_TENANT_ID="<tenant>"
 export ARM_SUBSCRIPTION_ID="<subscription-id>"
 ```
+<img width="1033" height="95" alt="image" src="https://github.com/user-attachments/assets/b06dd112-fc30-424f-aa01-3e87b1abc1f5" />
 
 ---
+
+## Verifying the values
+```bash
+echo $ARM_CLIENT_ID
+echo $ARM_CLIENT_SECRET
+echo $ARM_TENANT_ID
+echo $ARM_SUBSCRIPTION_ID
+```
+
+<img width="671" height="175" alt="image" src="https://github.com/user-attachments/assets/782f7815-c4cf-4289-afe2-2b2da9f58ce6" />
+
+---
+
+
+## Service Prinicipal Testing
+```bash
+ az login --service-principal -u $ARM_CLIENT_ID -p $ARM_CLIENT_SECRET --tenant $ARM_TENANT_ID
+```
+<img width="1341" height="374" alt="image" src="https://github.com/user-attachments/assets/2ea32796-3c64-4f93-9cdf-6f81fe4a23a3" />
+
 
 ## 🛠️ Sample Terraform Provider Configuration
 
@@ -85,6 +106,3 @@ provider "azurerm" {
   subscription_id = "<subscription-id>"
 }
 ```
-
----
-
