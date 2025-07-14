@@ -22,7 +22,7 @@ az account set --subscription "<subscription-id>"
 ### 2️⃣ Create Service Principal with Contributor Role
 
 ```bash
-az ad sp create-for-rbac --role="Contributor" --scopes="/subscriptions/<subscription-id>"
+az ad sp create-for-rbac --name="ServicePrinicipalName" --role="Contributor" --scopes="/subscriptions/<subscription-id>"
 ```
 
 ✅ **Output:**
@@ -35,14 +35,8 @@ az ad sp create-for-rbac --role="Contributor" --scopes="/subscriptions/<subscrip
 }
 ```
 
----
-
-### 3️⃣ (Optional) Test SP Login
-
-```bash
-az login --service-principal -u <appId> -p <password> --tenant <tenant>
-az vm list-sizes --location eastus
-```
+### Refer the below Image
+<img width="1460" height="283" alt="image" src="https://github.com/user-attachments/assets/9a7f2e0e-a5ea-4e3a-a788-1989ab8306a5" />
 
 ---
 
