@@ -17,6 +17,9 @@ az account list --output table
 az account set --subscription "<subscription-id>"
 ```
 
+<img width="1197" height="143" alt="image" src="https://github.com/user-attachments/assets/267f882f-921d-4b5d-97e1-7960ef687270" />
+
+
 ---
 
 ### 2️⃣ Create Service Principal with Contributor Role
@@ -30,6 +33,7 @@ az ad sp create-for-rbac --name="ServicePrinicipalName" --role="Contributor" --s
 ```json
 {
   "appId": "client-id",
+  "displayName": "ServicePrinicipalName"
   "password": "client-secret",
   "tenant": "tenant-id"
 }
