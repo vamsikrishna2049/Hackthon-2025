@@ -13,5 +13,5 @@ tags = {
 # allowed_ports  = [80, 443, 1433, 22, 23, 21, 3389, 8080, 9090, 9091]
 admin_password = "Test@123"
 
-sql_admin_username  = "sqladminuser"
-sql_admin_password  = "Test@123"
+sql_admin_username = "sqladminuser"
+sql_admin_password = "Test@123"

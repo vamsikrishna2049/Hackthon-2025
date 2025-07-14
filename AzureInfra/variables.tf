@@ -70,11 +70,11 @@ variable "secure_ports" {
   default = {
     rdp = {
       port   = 3389
-      source = "10.0.3.0/24"   # Example Bastion Subnet CIDR
+      source = "10.0.3.0/24" # Example Bastion Subnet CIDR
     }
     http = {
       port   = 80
-      source = "10.0.2.0/24"   # Example App Gateway Subnet CIDR
+      source = "10.0.2.0/24" # Example App Gateway Subnet CIDR
     }
     https = {
       port   = 443
@@ -82,7 +82,7 @@ variable "secure_ports" {
     }
     sql = {
       port   = 1433
-      source = "10.0.1.0/24"   # Example App Subnet CIDR
+      source = "10.0.1.0/24" # Example App Subnet CIDR
     }
   }
 }
