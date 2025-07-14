@@ -13,10 +13,10 @@ variable "tags" {
   description = "Common resource tags"
 }
 
-variable "vnet_name" {
-  type        = string
-  description = "Name of the Virtual Network"
-}
+#variable "vnet_name" {
+#  type        = string
+#  description = "Name of the Virtual Network"
+#}
 
 variable "vnet_cidr" {
   type        = string
@@ -53,10 +53,4 @@ variable "sql_admin_password" {
 variable "allowed_ports" {
   type    = list(number)
   default = [80, 443, 1433] # HTTP, HTTPS, Azure SQL
-}
-
-
-variable "nsg_name" {
-  type    = string
-  default = "nsg_name"
 }

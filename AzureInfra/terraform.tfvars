@@ -1,6 +1,5 @@
-resource_group_name = "azure-secure-rg"
+resource_group_name = "dev-hackathon-infra-rg"
 location            = "centralus"
-vnet_name           = "Sentinel-Pro"
 vnet_cidr           = "10.0.0.0/16"
 public_subnet_cidr  = "10.0.10.0/24"
 private_subnet_cidr = "10.0.20.0/24"
@@ -10,6 +9,6 @@ sql_admin_password  = "<REPLACE_WITH_STRONG_PASSWORD>"
 tags = {
   environment = "Dev"
   owner       = "vamsi"
-  project     = "ATM-Sentinel"
+  project     = "ATM"
 }
-nsg_name = "Network-Security-Group"
+allowed_ports = [80, 443, 1433]

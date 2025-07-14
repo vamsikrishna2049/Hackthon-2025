@@ -1,40 +1,46 @@
+# Resource Group Creation
 resource "azurerm_resource_group" "rg" {
-  name     = var.resource_group_name
-  location = var.location
-  tags     = var.tags
+  name     = var.resource_group_name # Name of the Resource Group
+  location = var.location            # Azure Region where the RG will be deployed
+  tags     = var.tags                # Resource Tags (for cost management, environment info)
 }
 
+# Create a Virtual Network (VNet)
 resource "azurerm_virtual_network" "vnet" {
-  name                = var.vnet_name
-  address_space       = [var.vnet_cidr]
-  location            = var.location
-  resource_group_name = azurerm_resource_group.rg.name
-  tags                = var.tags
+  name                = "${var.resource_group_name}-vnet" # VNet name derived from RG name
+  address_space       = [var.vnet_cidr]                   # CIDR range for the VNet
+  location            = var.location                      # Same location as Resource Group
+  resource_group_name = azurerm_resource_group.rg.name    # Link to the created Resource Group
+  tags                = var.tags                          # Apply the same tags
 }
 
+# Create a Public Subnet
 resource "azurerm_subnet" "public" {
-  name                 = "public-subnet"
+  name                 = "${var.resource_group_name}-vnet-public-subnet"
   resource_group_name  = azurerm_resource_group.rg.name
   virtual_network_name = azurerm_virtual_network.vnet.name
   address_prefixes     = [var.public_subnet_cidr]
 }
 
+# Create a Private Subnet
 resource "azurerm_subnet" "private" {
-  name                 = "private-subnet"
+  name                 = "${var.resource_group_name}-vnet-private-subnet"
   resource_group_name  = azurerm_resource_group.rg.name
   virtual_network_name = azurerm_virtual_network.vnet.name
   address_prefixes     = [var.private_subnet_cidr]
 }
 
+#Create a Bastion Subnet
 resource "azurerm_subnet" "bastion" {
-  name                 = "AzureBastionSubnet"
+  name                 = "AzureBastionSubnet" #name must be same
   resource_group_name  = azurerm_resource_group.rg.name
   virtual_network_name = azurerm_virtual_network.vnet.name
   address_prefixes     = [var.bastion_subnet_cidr]
 }
 
+#Create a Public IP Address
 resource "azurerm_public_ip" "nat" {
-  name                = "atm-nat-ip"
+  name                = "${var.resource_group_name}-vnet-nat-ip"
   location            = var.location
   resource_group_name = azurerm_resource_group.rg.name
   allocation_method   = "Static"
@@ -42,8 +48,9 @@ resource "azurerm_public_ip" "nat" {
   tags                = var.tags
 }
 
+#Create a NAT Gateway
 resource "azurerm_nat_gateway" "natgw" {
-  name                = "atm-nat-gateway"
+  name                = "${var.resource_group_name}-vnet-nat-gateway"
   location            = var.location
   resource_group_name = azurerm_resource_group.rg.name
   sku_name            = "Standard"
@@ -61,7 +68,7 @@ resource "azurerm_subnet_nat_gateway_association" "nat_assoc" {
 }
 
 resource "azurerm_network_interface" "vm_nic" {
-  name                = "vm-nic"
+  name                = "${var.resource_group_name}-vnet-vm-nic"
   location            = var.location
   resource_group_name = azurerm_resource_group.rg.name
 
@@ -81,7 +88,7 @@ locals {
 
 #Security Groups - Port
 resource "azurerm_network_security_group" "web_nsg" {
-  name                = var.nsg_name
+  name                = "${var.resource_group_name}-vnet-nsg"
   location            = var.location
   resource_group_name = var.resource_group_name
 }
