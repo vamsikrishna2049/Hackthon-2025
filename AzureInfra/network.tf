@@ -90,7 +90,7 @@ resource "azurerm_network_security_rule" "inbound_rules" {
   for_each = { for idx, port in local.allowed_ports : "rule-${port}" => port }
 
   name                        = each.key
-  priority                    = 100 + each.value  # priority must be unique and < 4096
+  priority                    = 100 + each.value # priority must be unique and < 4096
   direction                   = "Inbound"
   access                      = "Allow"
   protocol                    = "Tcp"

@@ -1,6 +1,3 @@
-# ----------------------
-# terraform.tfvars
-# ----------------------
 resource_group_name = "azure-secure-rg"
 location            = "centralus"
 vnet_name           = "Sentinel-Pro"
@@ -15,3 +12,4 @@ tags = {
   owner       = "vamsi"
   project     = "ATM-Sentinel"
 }
+nsg_name = "Network-Security-Group"

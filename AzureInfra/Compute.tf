@@ -1,3 +1,7 @@
+# Create the SSHkey Gen public_ip_address_id
+# ssh-keygen -t rsa
+# It will generate ssh key pair in the destination location
+
 resource "azurerm_linux_virtual_machine" "vm" {
   name                  = "atm-private-vm"
   location              = var.location
